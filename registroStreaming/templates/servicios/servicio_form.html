@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{% if servicio %}Actualizar Servicio{% else %}Agregar Servicio{% endif %}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{% if servicio %}Actualizar{% else %}Agregar{% endif %}</button>
+    <a href="{% url 'servicio-list' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+{% endblock %}

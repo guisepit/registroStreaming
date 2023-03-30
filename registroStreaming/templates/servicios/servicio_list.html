@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Servicios</h1>
+  <a href="{% url 'servicio-create' %}" class="btn btn-primary mb-3">Agregar Servicio</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Plataforma</th>
+        <th>Fecha de Suscripción</th>
+        <th>Monto Pagado</th>
+        <th>Próxima Fecha de Vencimiento</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for servicio in servicios %}
+        <tr>
+          <td>{{ servicio.nombre }}</td>
+          <td>{{ servicio.plataforma }}</td>
+          <td>{{ servicio.fecha_suscripcion }}</td>
+          <td>{{ servicio.monto_pagado }}</td>
+          <td>{{ servicio.proxima_fecha_vencimiento }}</td>
+          <td>
+            <a href="{% url 'servicio-update' pk=servicio.pk %}" class="btn btn-sm btn-primary">Editar</a>
+            <form action="{% url 'servicio-delete' pk=servicio.pk %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <input type="submit" value="Eliminar" class="btn btn-sm btn-danger">
+            </form>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="6">No se han encontrado servicios.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

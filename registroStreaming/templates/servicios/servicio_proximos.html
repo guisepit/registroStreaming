@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Servicios Próximos a Vencer</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Plataforma</th>
+        <th>Fecha de Suscripción</th>
+        <th>Monto Pagado</th>
+        <th>Próxima Fecha de Vencimiento</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for servicio in servicios %}
+        <tr>
+          <td>{{ servicio.nombre }}</td>
+          <td>{{ servicio.plataforma }}</td>
+          <td>{{ servicio.fecha_suscripcion }}</td>
+          <td>{{ servicio.monto_pagado }}</td>
+          <td>{{ servicio.proxima_fecha_vencimiento }}</td>
+          <td>
+            <form action="{% url 'servicio-pago' pk=servicio.pk %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-primary">PAGO</button>
+            </form>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="6">No se han encontrado servicios próximos a vencer.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

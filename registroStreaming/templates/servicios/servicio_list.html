@@ -6,6 +6,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Nombre</th>
         <th>Plataforma</th>
         <th>Fecha de Suscripción</th>
@@ -17,6 +18,7 @@
     <tbody>
       {% for servicio in servicios %}
         <tr>
+          <td>{{ servicio.id }}</td>
           <td>{{ servicio.nombre }}</td>
           <td>{{ servicio.plataforma }}</td>
           <td>{{ servicio.fecha_suscripcion }}</td>
@@ -32,7 +34,7 @@
         </tr>
       {% empty %}
         <tr>
-          <td colspan="6">No se han encontrado servicios.</td>
+          <td colspan="7">No se han encontrado servicios.</td>
         </tr>
       {% endfor %}
     </tbody>
